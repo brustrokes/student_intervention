@@ -12015,10 +12015,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">v_passed</span> <span class="o">=</span> <span class="mi">0</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="n">v_passed</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">v_failed</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">v_rates</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -12029,19 +12031,23 @@ div#notebook {
 <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">student_data</span><span class="p">))</span> <span class="o">-</span><span class="mi">1</span> <span class="c1">#menos o valor passed</span>
 
 <span class="c1"># TODO: Calculate passing students</span>
-<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">student_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">):</span>
-        <span class="n">v_passed</span><span class="o">+=</span><span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">v_failed</span><span class="o">+=</span><span class="mi">1</span>
-<span class="n">n_passed</span> <span class="o">=</span> <span class="n">v_passed</span>
+
+<span class="c1">#bloco comitado por sugestão da revisão</span>
+<span class="c1">#for _, student in student_data.iterrows():</span>
+<span class="c1">#    if (student[&#39;passed&#39;] == &#39;yes&#39;):</span>
+<span class="c1">#        v_passed+=1</span>
+<span class="c1">#    else:</span>
+<span class="c1">#        v_failed+=1</span>
+<span class="c1">#n_passed = v_passed</span>
+<span class="n">n_passed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate failing students</span>
-<span class="n">n_failed</span> <span class="o">=</span> <span class="n">v_failed</span>
+<span class="c1">#n_failed = v_failed </span>
+<span class="n">n_failed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;no&#39;</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate graduation rate</span>
-<span class="n">v_rates</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_passed</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_students</span><span class="p">)</span>
-<span class="n">grad_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v_rates</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">v_rates</span> <span class="o">=</span> <span class="n">n_passed</span> <span class="o">/</span> <span class="n">n_students</span>
+<span class="n">grad_rate</span> <span class="o">=</span> <span class="n">v_rates</span><span class="o">*</span><span class="mi">100</span>
 
 <span class="c1"># Print the results</span>
 <span class="k">print</span> <span class="s2">&quot;Total number of students: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_students</span><span class="p">)</span>
@@ -12088,7 +12094,7 @@ Graduation rate of the class: 67.09%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Extract feature columns</span>
@@ -12170,7 +12176,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -12241,7 +12247,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import any additional functionality you may need here</span>
@@ -12257,7 +12263,7 @@ Feature values:
 <span class="c1">##X_test = None</span>
 <span class="c1">##y_train = None</span>
 <span class="c1">##y_test = None</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span>  <span class="n">test_size</span> <span class="o">=</span> <span class="n">num_test</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span>  <span class="n">test_size</span> <span class="o">=</span> <span class="n">num_test</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">,</span><span class="n">stratify</span><span class="o">=</span><span class="n">y_all</span><span class="p">)</span>
 
 <span class="c1"># Show the results of the split</span>
 <span class="k">print</span> <span class="s2">&quot;Training set has {} samples.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -12276,14 +12282,6 @@ Feature values:
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training set has 300 samples.
 Testing set has 95 samples.
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>E:\Users\brustrokes\Anaconda2\lib\site-packages\sklearn\cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
 </pre>
 </div>
 </div>
@@ -12343,7 +12341,7 @@ Outras vantagens:
     Usa um subconjunto de pontos de treinamento na função de decisão (chamados vetores de suporte), portanto também é eficiente na memória.
    Versátil: diferentes funções do Kernel podem ser especificadas para a função de decisão.
 Desvantagens:
-    Se o número de características é muito maior do que o número de amostras, o método deve dar desempenhos fracos.
+    Quando o numero de amostras é muito maior que as caracteristicas, o tempo de processamento de treino torna-se bastante elevado. A complexidade tem um aumento cúbico neste caso.
     As SVMs não fornecem diretamente estimativas de probabilidade, estas são calculadas usando a five-fold cross-validation, o que tem um custo alto de processamento.
 
 Exemplo real: Biomedcentral
@@ -12409,7 +12407,7 @@ Devido aos efeitos do sofrimento financeiro das empresas sobre as partes interes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
@@ -12482,7 +12480,7 @@ Devido aos efeitos do sofrimento financeiro das empresas sobre as partes interes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -12494,7 +12492,7 @@ Devido aos efeitos do sofrimento financeiro das empresas sobre as partes interes
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">neighbors</span>
 
 <span class="c1"># TODO: Initialize the three models</span>
-<span class="n">clf_A</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf_A</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
 <span class="n">clf_B</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">clf_C</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsClassifier</span><span class="p">()</span>
 
@@ -12537,59 +12535,59 @@ Devido aos efeitos do sofrimento financeiro das empresas sobre as partes interes
 Training a SVC using a training set size of 100. . .
 Trained model in 0.0020 seconds
 Made predictions in 0.0010 seconds.
-F1 score for training set: 0.8447.
+F1 score for training set: 0.8736.
 Made predictions in 0.0010 seconds.
-F1 score for test set: 0.8824.
+F1 score for test set: 0.8050.
 Training a SVC using a training set size of 200. . .
-Trained model in 0.0040 seconds
-Made predictions in 0.0020 seconds.
-F1 score for training set: 0.8844.
+Trained model in 0.0030 seconds
+Made predictions in 0.0030 seconds.
+F1 score for training set: 0.8554.
 Made predictions in 0.0010 seconds.
-F1 score for test set: 0.8395.
+F1 score for test set: 0.8050.
 Training a SVC using a training set size of 300. . .
 Trained model in 0.0070 seconds
 Made predictions in 0.0050 seconds.
-F1 score for training set: 0.8690.
+F1 score for training set: 0.8481.
 Made predictions in 0.0010 seconds.
-F1 score for test set: 0.8408.
+F1 score for test set: 0.8312.
 -----LogisticRegression-------
 Training a LogisticRegression using a training set size of 100. . .
 Trained model in 0.0010 seconds
-Made predictions in 0.0030 seconds.
-F1 score for training set: 0.8725.
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.7733.
+F1 score for training set: 0.9091.
+Made predictions in 0.0000 seconds.
+F1 score for test set: 0.7832.
 Training a LogisticRegression using a training set size of 200. . .
 Trained model in 0.0020 seconds
 Made predictions in 0.0000 seconds.
-F1 score for training set: 0.8592.
+F1 score for training set: 0.8803.
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.8000.
+F1 score for test set: 0.8194.
 Training a LogisticRegression using a training set size of 300. . .
 Trained model in 0.0030 seconds
 Made predictions in 0.0000 seconds.
-F1 score for training set: 0.8078.
+F1 score for training set: 0.8276.
 Made predictions in 0.0000 seconds.
-F1 score for test set: 0.8054.
+F1 score for test set: 0.8451.
 -----KNeighbors-------
 Training a KNeighborsClassifier using a training set size of 100. . .
-Trained model in 0.0010 seconds
+Trained model in 0.0000 seconds
 Made predictions in 0.0020 seconds.
-F1 score for training set: 0.8421.
+F1 score for training set: 0.8655.
 Made predictions in 0.0020 seconds.
-F1 score for test set: 0.7867.
+F1 score for test set: 0.7838.
 Training a KNeighborsClassifier using a training set size of 200. . .
 Trained model in 0.0010 seconds
 Made predictions in 0.0030 seconds.
-F1 score for training set: 0.8414.
+F1 score for training set: 0.8471.
 Made predictions in 0.0020 seconds.
-F1 score for test set: 0.8212.
+F1 score for test set: 0.7619.
 Training a KNeighborsClassifier using a training set size of 300. . .
 Trained model in 0.0010 seconds
 Made predictions in 0.0070 seconds.
-F1 score for training set: 0.8475.
-Made predictions in 0.0020 seconds.
-F1 score for test set: 0.8456.
+F1 score for training set: 0.8597.
+Made predictions in 0.0030 seconds.
+F1 score for test set: 0.7794.
 </pre>
 </div>
 </div>
@@ -12628,22 +12626,22 @@ F1 score for test set: 0.8456.
 <td style="text-align:center">100</td>
 <td style="text-align:center">0.0020</td>
 <td style="text-align:center">0.0010</td>
-<td style="text-align:center">0.8447</td>
-<td style="text-align:center">0.8824</td>
+<td style="text-align:center">0.8736</td>
+<td style="text-align:center">0.8050</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">0.0030</td>
 <td style="text-align:center">0.0030</td>
-<td style="text-align:center">0.8844</td>
-<td style="text-align:center">0.8395</td>
+<td style="text-align:center">0.8554</td>
+<td style="text-align:center">0.8050</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
 <td style="text-align:center">0.0070</td>
 <td style="text-align:center">0.0050</td>
-<td style="text-align:center">0.8690</td>
-<td style="text-align:center">0.8408</td>
+<td style="text-align:center">0.8481</td>
+<td style="text-align:center">0.8312</td>
 </tr>
 </tbody>
 </table>
@@ -12662,22 +12660,22 @@ F1 score for test set: 0.8456.
 <td style="text-align:center">100</td>
 <td style="text-align:center">0.0010</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.8725</td>
-<td style="text-align:center">0.7733</td>
+<td style="text-align:center">0.9091</td>
+<td style="text-align:center">0.7832</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">0.0020</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.8592</td>
-<td style="text-align:center">0.8000</td>
+<td style="text-align:center">0.8803</td>
+<td style="text-align:center">0.8194</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
 <td style="text-align:center">0.0020</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.8078</td>
-<td style="text-align:center">0.8054</td>
+<td style="text-align:center">0.8276</td>
+<td style="text-align:center">0.8451</td>
 </tr>
 </tbody>
 </table>
@@ -12696,22 +12694,22 @@ F1 score for test set: 0.8456.
 <td style="text-align:center">100</td>
 <td style="text-align:center">0.0000</td>
 <td style="text-align:center">0.0030</td>
-<td style="text-align:center">0.8475</td>
-<td style="text-align:center">0.8456</td>
+<td style="text-align:center">0.8655</td>
+<td style="text-align:center">0.7838</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">0.0010</td>
 <td style="text-align:center">0.0030</td>
-<td style="text-align:center">0.8414</td>
-<td style="text-align:center">0.8212</td>
+<td style="text-align:center">0.7619</td>
+<td style="text-align:center">0.7619</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
 <td style="text-align:center">0.0010</td>
 <td style="text-align:center">0.0060</td>
-<td style="text-align:center">0.8475</td>
-<td style="text-align:center">0.8456</td>
+<td style="text-align:center">0.8597</td>
+<td style="text-align:center">0.7794</td>
 </tr>
 </tbody>
 </table>
@@ -12745,8 +12743,9 @@ F1 score for test set: 0.8456.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>No geral tanto o modelo do SVM quanto do K-Nearest Neighbors parecem promissores.
-Neste estudo acredito que o SVM é melhor qualificado, mesmo sendo levemente mais lento que o K-Nearest Neighbors, apresentou melhores resultados finais. Como a base de dados não possui muitos registros o tempo de execução(treino,testes) entre os dois modelos não será muito discrepante. No entanto se o número de dados for maior acredito que o K-Nearest Neighbors seria o melhor modelo para a solução.</p>
+<p>No geral tanto o modelo do SVM quanto do K-Nearest Neighbors parecem promissores, Ambos possuem baixa variância.
+Neste estudo acredito que o SVM é melhor qualificado, mesmo sendo levemente mais lento que o K-Nearest Neighbors, apresentou melhores resultados finais. Como a base de dados não possui muitos registros o tempo de execução(treino,testes) entre os dois modelos não será muito discrepante. No entanto se o número de dados for maior acredito que o K-Nearest Neighbors seria o melhor modelo para a solução.
+O Logistic Regression possui um melhor resultado apenas no training size de 300, e possuia alta variância.</p>
 
 </div>
 </div>
@@ -12770,8 +12769,12 @@ Neste estudo acredito que o SVM é melhor qualificado, mesmo sendo levemente mai
 <p>Como muitos outros algoritmos de machine learning, os SVMs precisam de alguns dados para começar com o que já está classificado (o conjunto de treinamento) e tentam prever um conjunto de dados não classificados (o conjunto de testes).
 Este modelo trabalha muito bem para o cenário do nosso exercicio de estudantes. Uma vez que temos 30 atributos diferentes para apenas 395 estudantes, que é nossa base de aprendizado e testes.
 Os dados que temos muitas vezes têm um monte de características diferentes, e assim podemos terminar traçando cada item de dados como um ponto no espaço, com o valor de cada característica sendo o valor em uma coordenada particular.
-O que queremos fazer é encontrar alguma linha que divide os dados entre os dois grupos de dados classificados de forma diferente, assim como nós podemos. Esta será a linha de modo que as distâncias do ponto mais próximo em cada um dos dois grupos será mais distante.Uma vez que temos essa linha, o chamamos de classificador.
-Você pode estender o exemplo de dois recursos para muitos outros recursos, como idade,studytime,traveltime ,etc, mas a idéia ainda permanece a mesma. Encontre a linha  que separa os dois grupos de dados o máximo possível e, em seguida, veja de que lado os novos dados apontam.</p>
+O que queremos fazer é encontrar alguma fronteira que divide os dados entre os dois grupos de dados classificados de forma diferente, assim como nós podemos. Esta será a fronteira de modo que as distâncias do ponto mais próximo em cada um dos dois grupos será mais distante.Uma vez que temos essa fronteira, o chamamos de classificador.
+Você pode estender o exemplo de dois recursos para muitos outros recursos, como idade,studytime,traveltime ,etc, mas a idéia ainda permanece a mesma. Encontre a fontreira  que separa os dois grupos de dados o máximo possível e, em seguida, veja de que lado os novos dados apontam.
+Outro ponto muito interessante do SVM é a implantação de kernels, que servem para identificar padrões. A tarefa geral da análise de padrões é encontrar e estudar tipos gerais de relações, como por exemplo, será que estudantes com alto valor em 'freetime' estão relacionados com altos valores em 'goout' e 'Walc' (weekend alcohol consumption). 
+Temos o chamado "truque do kernel" que permite operar em um espaço de diversas características de alta dimensão sem nunca computar as coordenadas dos dados apenas computando os produtos internos entre as imagens dos pares de dados no espaço.</p>
+<p>A seguir um exemplo de como o kernel RBF que será usado para esse algoritmo funciona:
+<img src="http://ciri.be/blog/wp-content/loop1.gif" alt="rotate.gif"></p>
 
 </div>
 </div>
@@ -12802,7 +12805,7 @@ Você pode estender o exemplo de dois recursos para muitos outros recursos, como
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
@@ -12810,13 +12813,14 @@ Você pode estender o exemplo de dois recursos para muitos outros recursos, como
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">fbeta_score</span><span class="p">,</span> <span class="n">make_scorer</span>
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> 
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
-<span class="n">parameters</span> <span class="o">=</span><span class="p">[{</span>
-    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
-    <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
- <span class="p">}]</span>
+<span class="n">parameters</span> <span class="o">=</span><span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;poly&#39;</span><span class="p">]</span> <span class="p">,</span><span class="s1">&#39;degree&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+    <span class="p">]</span>
 <span class="c1"># TODO: Initialize the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
 <span class="n">f1_scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">f1_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
@@ -12847,11 +12851,11 @@ Você pode estender o exemplo de dois recursos para muitos outros recursos, como
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Made predictions in 0.7070 seconds.
-Made predictions in 0.0060 seconds.
-Tuned model has a training F1 score of 0.9794.
-Made predictions in 0.0020 seconds.
-Tuned model has a testing F1 score of 0.8466.
+<pre>Made predictions in 1.7430 seconds.
+Made predictions in 0.0030 seconds.
+Tuned model has a training F1 score of 0.8091.
+Made predictions in 0.0010 seconds.
+Tuned model has a testing F1 score of 0.8477.
 </pre>
 </div>
 </div>
@@ -12876,10 +12880,9 @@ Tuned model has a testing F1 score of 0.8466.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-O F1 Score após "tunado" conseguiu valores superiores no treino ao valor padrão obtido anteriormente. Mas não o valor de teste.
-O treino chegou ao incrível valor de 0.9794, comparando com o valor sem tunning o melhor valor era de 0.8844 (treino de 200)
-Já o teste ficou abaixo, com o valor de 0.8466, comparando com o valor sem tunning o melhor valor era de 0.8824 (treino de 100)</p>
-<p>Para avaliação testei diversos kernels para o F1Score, Com os kernels ['linear', 'poly', 'rbf', 'sigmoid'].O responsável pelos valores foi o kernel rbf, por isso deixei apenas ele parametrizado, já que colocando todos os kernels,o modelo final também ficou muito mais lento, levando 26.7500 segundos, contra milésimos do modelo anterior.</p>
+O F1 Score após "tunado" conseguiu valores superiores no score ao valor padrão obtido anteriormente.
+O teste chegou ao valor de 0.8477, comparando com o valor sem tunning o melhor valor era de 0.8312 (treino de 300)</p>
+<p>Para avaliação testei diversos kernels para o F1Score, Com os kernels ['linear', 'poly', 'rbf', 'sigmoid'].O responsável pelos valores foi o kernel rbf.</p>
 
 </div>
 </div>
